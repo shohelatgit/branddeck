@@ -17,6 +17,55 @@
         }
         document.addEventListener('DOMContentLoaded', setActiveLink);
     </script>
+    <style>
+        .fm-section { margin-bottom: 32px; }
+        .fm-card { background: white; border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; }
+        .fm-card-title { font-size: 16px; font-weight: 600; color: #111827; margin: 0 0 20px 0; display: flex; align-items: center; gap: 8px; }
+        .fm-card-title .icon { width: 20px; height: 20px; color: var(--primary-blue); }
+        .fm-scenario-badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .fm-scenario-badge.conservative { background: #fef3c7; color: #92400e; }
+        .fm-scenario-badge.aggressive { background: #dbeafe; color: #1e40af; }
+        .fm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .fm-table th { background: #f9fafb; padding: 12px 16px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb; }
+        .fm-table th.scenario-header { text-align: center; }
+        .fm-table th .scenario-label { display: block; font-size: 10px; font-weight: 500; text-transform: uppercase; margin-top: 4px; }
+        .fm-table td { padding: 12px 16px; border-bottom: 1px solid #f3f4f6; color: #4b5563; }
+        .fm-table tr:hover td { background: #f9fafb; }
+        .fm-table .highlight-row td { background: #eff6ff; font-weight: 600; color: #1e40af; }
+        .fm-table .subtext { font-size: 11px; color: #9ca3af; display: block; margin-top: 2px; }
+        .fm-metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+        .fm-metric-card { background: #f9fafb; border-radius: 10px; padding: 16px; text-align: center; }
+        .fm-metric-value { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+        .fm-metric-label { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+        .fm-metric-simple { font-size: 11px; color: #9ca3af; font-style: italic; }
+        .fm-benchmark-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 500; margin-top: 4px; }
+        .fm-benchmark-badge.above { background: #dcfce7; color: #166534; }
+        .fm-benchmark-badge.below { background: #fee2e2; color: #991b1b; }
+        .fm-benchmark-badge.neutral { background: #fef3c7; color: #92400e; }
+        .fm-compare-table { width: 100%; border-collapse: collapse; }
+        .fm-compare-table th { background: #f9fafb; padding: 12px 16px; text-align: center; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb; }
+        .fm-compare-table th:first-child { text-align: left; }
+        .fm-compare-table td { padding: 12px 16px; border-bottom: 1px solid #f3f4f6; text-align: center; color: #4b5563; }
+        .fm-compare-table td:first-child { text-align: left; font-weight: 500; }
+        .fm-revenue-breakdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .fm-revenue-item { text-align: center; padding: 16px; background: #f9fafb; border-radius: 10px; }
+        .fm-revenue-percent { font-size: 28px; font-weight: 700; color: var(--primary-blue); margin-bottom: 4px; }
+        .fm-revenue-label { font-size: 13px; color: #4b5563; font-weight: 500; }
+        .fm-revenue-detail { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+        .fm-simple-definition { font-size: 12px; color: #6b7280; margin-top: 8px; padding: 12px; background: #f9fafb; border-radius: 8px; border-left: 3px solid var(--primary-blue); }
+        .fm-simple-definition strong { color: #374151; }
+        .fm-cash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .fm-cash-item { background: #f9fafb; border-radius: 10px; padding: 16px; }
+        .fm-cash-label { font-size: 12px; color: #6b7280; margin-bottom: 4px; }
+        .fm-cash-value { font-size: 22px; font-weight: 700; color: #111827; }
+        .fm-cash-value.positive { color: #059669; }
+        .fm-cash-value.negative { color: #dc2626; }
+        .fm-header-subtitle { font-size: 13px; color: #6b7280; margin-top: 4px; }
+        .fm-scenario-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .fm-scenario-col h4 { font-size: 14px; font-weight: 600; margin: 0 0 16px 0; display: flex; align-items: center; gap: 8px; }
+        .fm-scenario-col.conservative h4 { color: #92400e; }
+        .fm-scenario-col.aggressive h4 { color: #1e40af; }
+    </style>
 </head>
 
 <body>
@@ -100,7 +149,7 @@
                 <div class="header">
                     <div>
                         <h1>Financial Model</h1>
-                        <p>Revenue projections, expense analysis, and financial metrics for Deel.</p>
+                        <p class="fm-header-subtitle">5-year projections for EOR/HR Platform industry. All figures in USD.</p>
                     </div>
                     <div class="header-badges">
                         <div class="live-badge">
@@ -108,140 +157,368 @@
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="card" style="grid-column: span 2;">
-                        <h2 class="card-title">Revenue Projections</h2>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
-                            <div style="text-align: center;">
-                                <div style="font-size: 24px; font-weight: 700; color: var(--primary-blue); margin-bottom: 8px;">$50M</div>
-                                <div style="font-size: 14px; color: #6b7280;">2024 Revenue</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 24px; font-weight: 700; color: var(--color-emerald); margin-bottom: 8px;">$120M</div>
-                                <div style="font-size: 14px; color: #6b7280;">2025 Projection</div>
-                            </div>
-                            <div style="text-align: center;">
-                                <div style="font-size: 24px; font-weight: 700; color: var(--color-purple); margin-bottom: 8px;">$250M</div>
-                                <div style="font-size: 14px; color: #6b7280;">2026 Projection</div>
-                            </div>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                            <div>
-                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Revenue Growth</h3>
-                                <div class="projection-item" style="margin-bottom: 12px;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                        <span>2024</span>
-                                        <span>$50M</span>
-                                    </div>
-                                    <div class="progress-track">
-                                        <div class="progress-fill" style="width: 100%; background-color: var(--primary-blue);"></div>
-                                    </div>
-                                </div>
-                                <div class="projection-item" style="margin-bottom: 12px;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                        <span>2025</span>
-                                        <span>$120M</span>
-                                    </div>
-                                    <div class="progress-track">
-                                        <div class="progress-fill" style="width: 50%; background-color: var(--color-emerald);"></div>
-                                    </div>
-                                </div>
-                                <div class="projection-item">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                        <span>2026</span>
-                                        <span>$250M</span>
-                                    </div>
-                                    <div class="progress-track">
-                                        <div class="progress-fill" style="width: 25%; background-color: var(--color-purple);"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Revenue Streams</h3>
-                                <div style="display: flex; flex-direction: column; gap: 12px;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span>Subscriptions</span>
-                                        <span style="font-weight: 600;">70%</span>
-                                    </div>
-                                    <div class="progress-track">
-                                        <div class="progress-fill" style="width: 70%; background-color: var(--primary-blue);"></div>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span>Transactions</span>
-                                        <span style="font-weight: 600;">25%</span>
-                                    </div>
-                                    <div class="progress-track">
-                                        <div class="progress-fill" style="width: 25%; background-color: var(--color-orange);"></div>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span>Premium Services</span>
-                                        <span style="font-weight: 600;">5%</span>
-                                    </div>
-                                    <div class="progress-track">
-                                        <div class="progress-fill" style="width: 5%; background-color: var(--color-emerald);"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h2 class="card-title">Expense Breakdown</h2>
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>R&D</span>
-                                <span style="font-weight: 600;">25%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 25%; background-color: var(--primary-blue);"></div>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Sales & Marketing</span>
-                                <span style="font-weight: 600;">30%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 30%; background-color: var(--color-orange);"></div>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Operations</span>
-                                <span style="font-weight: 600;">25%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 25%; background-color: var(--color-emerald);"></div>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Admin & General</span>
-                                <span style="font-weight: 600;">20%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 20%; background-color: var(--color-purple);"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h2 class="card-title">Key Financial Metrics</h2>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                            <div class="metric-item">
-                                <div class="metric-value">18</div>
-                                <div class="metric-label">Months to Break-even</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-value">300%</div>
-                                <div class="metric-label">Internal Rate of Return</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-value">5x</div>
-                                <div class="metric-label">Revenue Multiple</div>
-                            </div>
-                            <div class="metric-item">
-                                <div class="metric-value">$150M</div>
-                                <div class="metric-label">Funding Raised</div>
-                            </div>
-                        </div>
-                    </div>
-                
-        </div>
-    </div>
 
+                <!-- Current Snapshot -->
+                <div class="fm-section">
+                    <div class="fm-card">
+                        <h2 class="fm-card-title">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            Current Snapshot (2024)
+                        </h2>
+                        <div class="fm-metric-grid">
+                            <div class="fm-metric-card">
+                                <div class="fm-metric-value">$50M</div>
+                                <div class="fm-metric-label">Annual Recurring Revenue (ARR)</div>
+                            </div>
+                            <div class="fm-metric-card">
+                                <div class="fm-metric-value">500</div>
+                                <div class="fm-metric-label">Active Customers</div>
+                            </div>
+                            <div class="fm-metric-card">
+                                <div class="fm-metric-value">$100K</div>
+                                <div class="fm-metric-label">Avg Revenue Per Customer</div>
+                            </div>
+                            <div class="fm-metric-card">
+                                <div class="fm-metric-value">300</div>
+                                <div class="fm-metric-label">Employees</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-Year Revenue Projections -->
+                <div class="fm-section">
+                    <div class="fm-card">
+                        <h2 class="fm-card-title">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            5-Year Revenue Projection (2024-2028)
+                        </h2>
+                        
+                        <div class="fm-scenario-row">
+                            <div class="fm-scenario-col conservative">
+                                <h4><span class="fm-scenario-badge conservative">Conservative</span></h4>
+                                <table class="fm-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Metric</th>
+                                            <th>2024</th>
+                                            <th>2025</th>
+                                            <th>2026</th>
+                                            <th>2027</th>
+                                            <th>2028</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="highlight-row">
+                                            <td>ARR ($M)</td>
+                                            <td>$50</td>
+                                            <td>$63</td>
+                                            <td>$78</td>
+                                            <td>$95</td>
+                                            <td>$114</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Growth %</td>
+                                            <td>-</td>
+                                            <td>25%</td>
+                                            <td>25%</td>
+                                            <td>22%</td>
+                                            <td>20%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customers</td>
+                                            <td>500</td>
+                                            <td>630</td>
+                                            <td>780</td>
+                                            <td>950</td>
+                                            <td>1,140</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ARPU</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Customers</td>
+                                            <td>150</td>
+                                            <td>175</td>
+                                            <td>200</td>
+                                            <td>225</td>
+                                            <td>250</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Churned</td>
+                                            <td>25</td>
+                                            <td>32</td>
+                                            <td>39</td>
+                                            <td>47</td>
+                                            <td>57</td>
+                                        </tr>
+                                        <tr>
+                                            <td>NRR %</td>
+                                            <td>105%</td>
+                                            <td>106%</td>
+                                            <td>107%</td>
+                                            <td>108%</td>
+                                            <td>108%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="fm-scenario-col aggressive">
+                                <h4><span class="fm-scenario-badge aggressive">Aggressive</span></h4>
+                                <table class="fm-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Metric</th>
+                                            <th>2024</th>
+                                            <th>2025</th>
+                                            <th>2026</th>
+                                            <th>2027</th>
+                                            <th>2028</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="highlight-row">
+                                            <td>ARR ($M)</td>
+                                            <td>$50</td>
+                                            <td>$75</td>
+                                            <td>$110</td>
+                                            <td>$155</td>
+                                            <td>$210</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Growth %</td>
+                                            <td>-</td>
+                                            <td>50%</td>
+                                            <td>47%</td>
+                                            <td>41%</td>
+                                            <td>35%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Customers</td>
+                                            <td>500</td>
+                                            <td>750</td>
+                                            <td>1,100</td>
+                                            <td>1,550</td>
+                                            <td>2,100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ARPU</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                            <td>$100K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Customers</td>
+                                            <td>150</td>
+                                            <td>300</td>
+                                            <td>425</td>
+                                            <td>550</td>
+                                            <td>680</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Churned</td>
+                                            <td>25</td>
+                                            <td>38</td>
+                                            <td>55</td>
+                                            <td>78</td>
+                                            <td>110</td>
+                                        </tr>
+                                        <tr>
+                                            <td>NRR %</td>
+                                            <td>105%</td>
+                                            <td>110%</td>
+                                            <td>112%</td>
+                                            <td>115%</td>
+                                            <td>115%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="fm-simple-definition">
+                            <strong>Simple breakdown:</strong> Conservative scenario = steady 20-25% annual growth from current market position. Aggressive scenario = 35-50% annual growth by taking market share from competitors like Rippling, Oyster, and Papaya Global. NRR (Net Revenue Retention) shows how much revenue grows from existing customers through upsells and expansions.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Breakdown -->
+                <div class="fm-section">
+                    <div class="fm-card">
+                        <h2 class="fm-card-title">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                            Revenue Breakdown (EOR/HR Industry)
+                        </h2>
+                        <div class="fm-revenue-breakdown">
+                            <div class="fm-revenue-item">
+                                <div class="fm-revenue-percent">45%</div>
+                                <div class="fm-revenue-label">Employer of Record</div>
+                                <div class="fm-revenue-detail">Core HR outsourcing services</div>
+                            </div>
+                            <div class="fm-revenue-item">
+                                <div class="fm-revenue-percent">30%</div>
+                                <div class="fm-revenue-label">Payroll Processing</div>
+                                <div class="fm-revenue-detail">Global payroll management</div>
+                            </div>
+                            <div class="fm-revenue-item">
+                                <div class="fm-revenue-percent">15%</div>
+                                <div class="fm-revenue-label">Contractor Management</div>
+                                <div class="fm-revenue-detail">Gig economy & freelance</div>
+                            </div>
+                            <div class="fm-revenue-item">
+                                <div class="fm-revenue-percent">10%</div>
+                                <div class="fm-revenue-label">Benefits Admin</div>
+                                <div class="fm-revenue-detail">Health, 401k, compliance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit Economics -->
+                <div class="fm-section">
+                    <div class="fm-card">
+                        <h2 class="fm-card-title">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Unit Economics (Simple Terms)
+                        </h2>
+                        <table class="fm-compare-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                    <th>What It Means (Simple)</th>
+                                    <th>Industry Benchmark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>CAC</strong><br><span class="subtext">Customer Acquisition Cost</span></td>
+                                    <td>$15,000</td>
+                                    <td>Total cost to win ONE new customer (sales, marketing, tools)</td>
+                                    <td>$10K-$20K typical</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LTV</strong><br><span class="subtext">Lifetime Value</span></td>
+                                    <td>$450,000</td>
+                                    <td>Total money ONE customer pays over their entire relationship</td>
+                                    <td>3-5x CAC is healthy</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LTV:CAC Ratio</strong></td>
+                                    <td><strong>30:1</strong></td>
+                                    <td>For every $1 spent to get a customer, you get $30 back</td>
+                                    <td>3:1 is minimum good</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CAC Payback</strong></td>
+                                    <td>14 months</td>
+                                    <td>Months to earn back what you spent to get the customer</td>
+                                    <td>12-18 months typical</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gross Margin</strong></td>
+                                    <td><strong>75%</strong></td>
+                                    <td>Of every $1 earned, you keep $0.75 after direct costs</td>
+                                    <td>70-80% for SaaS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Key Metrics Dashboard -->
+                <div class="fm-section">
+                    <div class="fm-card">
+                        <h2 class="fm-card-title">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            Key Metrics vs Industry Benchmarks
+                        </h2>
+                        <table class="fm-compare-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Our Performance</th>
+                                    <th>Industry Benchmark (2024-2025)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ARR Growth Rate</strong></td>
+                                    <td>40% (Aggressive)</td>
+                                    <td>26% median, 50% top quartile</td>
+                                    <td><span class="fm-benchmark-badge above">Top Tier</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Net Revenue Retention</strong></td>
+                                    <td>108%</td>
+                                    <td>101% median, 110%+ great</td>
+                                    <td><span class="fm-benchmark-badge above">Above Average</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Churn Rate</strong></td>
+                                    <td>5%</td>
+                                    <td>5-7% annual typical</td>
+                                    <td><span class="fm-benchmark-badge above">Good</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ARR per Employee</strong></td>
+                                    <td>$167K</td>
+                                    <td>$200K benchmark (private SaaS)</td>
+                                    <td><span class="fm-benchmark-badge neutral">Room to Grow</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gross Margin</strong></td>
+                                    <td>75%</td>
+                                    <td>70-80% for SaaS platforms</td>
+                                    <td><span class="fm-benchmark-badge above">Healthy</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>S&M % of Revenue</strong></td>
+                                    <td>42%</td>
+                                    <td>47% for VC-backed companies</td>
+                                    <td><span class="fm-benchmark-badge above">Efficient</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Cash & Runway -->
+                <div class="fm-section">
+                    <div class="fm-card">
+                        <h2 class="fm-card-title">
+                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Cash & Path to Profitability
+                        </h2>
+                        <div class="fm-cash-grid">
+                            <div class="fm-cash-item">
+                                <div class="fm-cash-label">Monthly Burn Rate</div>
+                                <div class="fm-cash-value">$3.5M</div>
+                            </div>
+                            <div class="fm-cash-item">
+                                <div class="fm-cash-label">Cash Runway (at current rate)</div>
+                                <div class="fm-cash-value">24 months</div>
+                            </div>
+                            <div class="fm-cash-item">
+                                <div class="fm-cash-label">Path to Profitability</div>
+                                <div class="fm-cash-value">2027</div>
+                            </div>
+                        </div>
+                        <div class="fm-simple-definition">
+                            <strong>Simple breakdown:</strong> Burn rate = cash spent each month. Runway = how many months until cash runs out. We're on track to break even (profit) by 2027 as revenue grows faster than expenses. The EOR industry typically reaches profitability 3-5 years after reaching $50M ARR.
+                        </div>
+                    </div>
+                </div>
+
+        </div>
     </div>
 
 </body>

@@ -5,6 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go To Market | Competitor Analysis Dashboard</title>
     <link rel="stylesheet" href="../components/common.css">
+    <style>
+        .gtm-funnel {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 32px;
+        }
+        
+        .funnel-stage {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+        }
+        
+        .funnel-stage::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid var(--border-color);
+            z-index: 1;
+        }
+        
+        .funnel-stage:last-child::after {
+            display: none;
+        }
+        
+        .funnel-stage.stage-1 { margin-left: 0; margin-right: 0; width: 100%; }
+        .funnel-stage.stage-2 { margin-left: 4%; margin-right: 4%; width: 92%; }
+        .funnel-stage.stage-3 { margin-left: 8%; margin-right: 8%; width: 84%; }
+        .funnel-stage.stage-4 { margin-left: 12%; margin-right: 12%; width: 76%; }
+        
+        .stage-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .stage-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .stage-1 .stage-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .stage-2 .stage-icon { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .stage-3 .stage-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .stage-4 .stage-icon { background: linear-gradient(135deg, #10b981, #059669); }
+        
+        .stage-title {
+            flex: 1;
+        }
+        
+        .stage-title h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111827;
+            margin: 0 0 4px 0;
+        }
+        
+        .stage-benchmark {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        
+        .stage-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .funnel-section h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 12px 0;
+        }
+        
+        .channel-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #374151;
+            margin: 0 6px 6px 0;
+        }
+        
+        .channel-tag .icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.7;
+        }
+        
+        .message-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 13px;
+            color: #4b5563;
+        }
+        
+        .message-item:last-child {
+            border-bottom: none;
+        }
+        
+        .message-item .bullet {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        
+        .stage-1 .message-item .bullet { background: #3b82f6; }
+        .stage-2 .message-item .bullet { background: #8b5cf6; }
+        .stage-3 .message-item .bullet { background: #f59e0b; }
+        .stage-4 .message-item .bullet { background: #10b981; }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-size: 13px;
+            color: #4b5563;
+        }
+        
+        .metric-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+        }
+        
+        .benchmark-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+    </style>
     <script>
         function setActiveLink() {
             const currentPath = window.location.pathname.split('/').pop();
@@ -108,105 +280,317 @@
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="card" style="grid-column: span 2;">
-                        <h2 class="card-title">Launch Roadmap</h2>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-                            <div style="padding: 16px; border: 1px solid var(--primary-blue); border-radius: 8px; text-align: center;">
-                                <div style="font-size: 14px; font-weight: 600; color: var(--primary-blue); margin-bottom: 8px;">Phase 1</div>
-                                <div style="font-size: 12px; margin-bottom: 8px;">Q1-Q2 2024</div>
-                                <div style="font-size: 10px; color: #6b7280;">US Market Penetration</div>
-                                <div style="margin-top: 8px; padding: 4px 8px; background: var(--primary-blue); color: white; border-radius: 12px; font-size: 10px;">COMPLETED</div>
-                            </div>
-                            <div style="padding: 16px; border: 1px solid var(--color-emerald); border-radius: 8px; text-align: center;">
-                                <div style="font-size: 14px; font-weight: 600; color: var(--color-emerald); margin-bottom: 8px;">Phase 2</div>
-                                <div style="font-size: 12px; margin-bottom: 8px;">Q3-Q4 2024</div>
-                                <div style="font-size: 10px; color: #6b7280;">EU Expansion</div>
-                                <div style="margin-top: 8px; padding: 4px 8px; background: var(--color-emerald); color: white; border-radius: 12px; font-size: 10px;">IN PROGRESS</div>
-                            </div>
-                            <div style="padding: 16px; border: 1px solid var(--color-orange); border-radius: 8px; text-align: center;">
-                                <div style="font-size: 14px; font-weight: 600; color: var(--color-orange); margin-bottom: 8px;">Phase 3</div>
-                                <div style="font-size: 12px; margin-bottom: 8px;">2025</div>
-                                <div style="font-size: 10px; color: #6b7280;">APAC Growth</div>
-                                <div style="margin-top: 8px; padding: 4px 8px; background: #e5e7eb; color: #6b7280; border-radius: 12px; font-size: 10px;">PLANNED</div>
-                            </div>
-                            <div style="padding: 16px; border: 1px solid var(--color-pink); border-radius: 8px; text-align: center;">
-                                <div style="font-size: 14px; font-weight: 600; color: var(--color-pink); margin-bottom: 8px;">Phase 4</div>
-                                <div style="font-size: 12px; margin-bottom: 8px;">2026+</div>
-                                <div style="font-size: 10px; color: #6b7280;">Global Scale</div>
-                                <div style="margin-top: 8px; padding: 4px 8px; background: #e5e7eb; color: #6b7280; border-radius: 12px; font-size: 10px;">FUTURE</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h2 class="card-title">Channel Strategy</h2>
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Direct Sales</span>
-                                <span style="font-weight: 600;">60%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 60%; background-color: var(--primary-blue);"></div>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Strategic Partnerships</span>
-                                <span style="font-weight: 600;">25%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 25%; background-color: var(--color-emerald);"></div>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <span>Digital Marketing</span>
-                                <span style="font-weight: 600;">15%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 15%; background-color: var(--color-orange);"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h2 class="card-title">Key Milestones</h2>
-                        <div class="milestone-item" style="margin-bottom: 16px;">
-                            <div class="milestone-header">
-                                <span>Product-Market Fit</span>
-                                <span>✓</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 100%; background-color: var(--color-emerald);"></div>
-                            </div>
-                        </div>
-                        <div class="milestone-item" style="margin-bottom: 16px;">
-                            <div class="milestone-header">
-                                <span>10,000 Customers</span>
-                                <span>✓</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 100%; background-color: var(--color-emerald);"></div>
-                            </div>
-                        </div>
-                        <div class="milestone-item" style="margin-bottom: 16px;">
-                            <div class="milestone-header">
-                                <span>$50M ARR</span>
-                                <span>✓</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 100%; background-color: var(--color-emerald);"></div>
-                            </div>
-                        </div>
-                        <div class="milestone-item">
-                            <div class="milestone-header">
-                                <span>$2.4B Valuation</span>
-                                <span>✓</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 100%; background-color: var(--color-emerald);"></div>
-                            </div>
-                        </div>
-                    </div>
                 
+                <div class="gtm-funnel">
+                    <!-- Stage 1: Awareness -->
+                    <div class="funnel-stage stage-1">
+                        <div class="stage-header">
+                            <div class="stage-icon">A</div>
+                            <div class="stage-title">
+                                <h3>Stage 1: Awareness</h3>
+                                <span class="stage-benchmark">Industry Benchmark: 2.3% visitor-to-lead conversion</span>
+                            </div>
+                        </div>
+                        <div class="stage-content">
+                            <div class="funnel-section">
+                                <h4>Key Channels</h4>
+                                <div>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        SEO / Organic Search
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                                        Content Marketing
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                        Social Media (LinkedIn)
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                                        Paid Advertising
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                                        PR / Comms
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        Referrals
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Target Messaging</h4>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Educational content addressing pain points</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Problem-awareness and brand introduction</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Thought leadership positioning</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>SEO-optimized answers to common questions</span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Key Metrics</h4>
+                                <div class="metric-row">
+                                    <span class="metric-label">Impressions</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Website Traffic</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Ad CTR</span>
+                                    <span class="metric-value"><span class="benchmark-badge">~1-2%</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Organic Conv. Rate</span>
+                                    <span class="metric-value"><span class="benchmark-badge">2.6%</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stage 2: Consideration -->
+                    <div class="funnel-stage stage-2">
+                        <div class="stage-header">
+                            <div class="stage-icon">C</div>
+                            <div class="stage-title">
+                                <h3>Stage 2: Consideration</h3>
+                                <span class="stage-benchmark">Industry Benchmark: 31% lead-to-MQL conversion</span>
+                            </div>
+                        </div>
+                        <div class="stage-content">
+                            <div class="funnel-section">
+                                <h4>Key Channels</h4>
+                                <div>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                        Email Nurture ($36 ROI)
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                        Webinars
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Case Studies
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                        Product Tours
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                        ROI Calculators
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Target Messaging</h4>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Solution positioning vs alternatives</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Comparison guides and differentiation</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Customer success stories and proof points</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Value proposition articulation</span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Key Metrics</h4>
+                                <div class="metric-row">
+                                    <span class="metric-label">Demo Requests</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Content Downloads</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Email Open Rate</span>
+                                    <span class="metric-value"><span class="benchmark-badge">~42%</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Lead-to-MQL Rate</span>
+                                    <span class="metric-value"><span class="benchmark-badge">31%</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stage 3: Conversion -->
+                    <div class="funnel-stage stage-3">
+                        <div class="stage-header">
+                            <div class="stage-icon">V</div>
+                            <div class="stage-title">
+                                <h3>Stage 3: Conversion</h3>
+                                <span class="stage-benchmark">Industry Benchmark: 13% MQL-to-SQL, 22-30% close rate</span>
+                            </div>
+                        </div>
+                        <div class="stage-content">
+                            <div class="funnel-section">
+                                <h4>Key Channels</h4>
+                                <div>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                        Sales Demos
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        Free Trials
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        Sales Outreach
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        Proposals / Quotes
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                        Self-Serve Onboarding
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Target Messaging</h4>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Value demonstration and ROI proof</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Objection handling and risk mitigation</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Urgency and next steps clarity</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Implementation support messaging</span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Key Metrics</h4>
+                                <div class="metric-row">
+                                    <span class="metric-label">Trial-to-Paid Rate</span>
+                                    <span class="metric-value"><span class="benchmark-badge">~5-15%</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">MQL-to-SQL Rate</span>
+                                    <span class="metric-value"><span class="benchmark-badge">13%</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Sales Cycle (Days)</span>
+                                    <span class="metric-value"><span class="benchmark-badge">100+</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Avg Deal Size</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Stage 4: Retention -->
+                    <div class="funnel-stage stage-4">
+                        <div class="stage-header">
+                            <div class="stage-icon">R</div>
+                            <div class="stage-title">
+                                <h3>Stage 4: Retention</h3>
+                                <span class="stage-benchmark">Industry Benchmark: 100-120% NRR, 5-7% churn</span>
+                            </div>
+                        </div>
+                        <div class="stage-content">
+                            <div class="funnel-section">
+                                <h4>Key Channels</h4>
+                                <div>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        Customer Success
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                                        Community / User Groups
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                                        In-App Engagement
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                        Upsell / Cross-sell
+                                    </span>
+                                    <span class="channel-tag">
+                                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                        Account Management
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Target Messaging</h4>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Value delivery and ROI realization</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Expansion opportunities and upsell</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Customer advocacy and referrals</span>
+                                </div>
+                                <div class="message-item">
+                                    <span class="bullet"></span>
+                                    <span>Proactive support and onboarding</span>
+                                </div>
+                            </div>
+                            <div class="funnel-section">
+                                <h4>Key Metrics</h4>
+                                <div class="metric-row">
+                                    <span class="metric-label">Net Revenue Retention</span>
+                                    <span class="metric-value"><span class="benchmark-badge">100-120%</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Churn Rate</span>
+                                    <span class="metric-value"><span class="benchmark-badge">5-7%</span></span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">Customer LTV</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                                <div class="metric-row">
+                                    <span class="metric-label">NPS Score</span>
+                                    <span class="metric-value">—</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
-    </div>
-
     </div>
 
 </body>

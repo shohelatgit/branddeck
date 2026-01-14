@@ -5,6 +5,166 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brand Archetype | Competitor Analysis Dashboard</title>
     <link rel="stylesheet" href="../components/common.css">
+    <style>
+        .ba-why-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        
+        .ba-why-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .ba-why-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .ba-why-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0;
+        }
+        
+        .ba-why-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        .ba-why-points {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .ba-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .ba-point-icon {
+            width: 28px;
+            height: 28px;
+            background: #dbeafe;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .ba-point-icon svg {
+            width: 16px;
+            height: 16px;
+            color: #2563eb;
+        }
+        
+        .ba-point-text h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 4px 0;
+        }
+        
+        .ba-point-text p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .ba-why-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .ba-sidebar-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8b5cf6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .ba-core-quote {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1e293b;
+            line-height: 1.6;
+            margin: 0 0 16px 0;
+            font-style: italic;
+        }
+        
+        .ba-core-quote::before {
+            content: '"';
+            font-size: 24px;
+            color: #c7d2fe;
+            margin-right: 4px;
+        }
+        
+        .ba-core-quote::after {
+            content: '"';
+            font-size: 24px;
+            color: #c7d2fe;
+            margin-left: 4px;
+        }
+        
+        .ba-source {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        .ba-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f1f5f9;
+        }
+        
+        .ba-stat-item {
+            text-align: center;
+            padding: 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .ba-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #6366f1;
+        }
+        
+        .ba-stat-label {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+    </style>
     <script>
         function setActiveLink() {
             const currentPath = window.location.pathname.split('/').pop();
@@ -108,6 +268,81 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Why Brand Archetyping Matters Section -->
+                <div class="ba-why-section">
+                    <div class="ba-why-header">
+                        <div class="ba-why-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        </div>
+                        <h2 class="ba-why-title">Why Brand Archetyping Matters in Business</h2>
+                    </div>
+                    
+                    <div class="ba-why-content">
+                        <div class="ba-why-points">
+                            <div class="ba-point">
+                                <div class="ba-point-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                </div>
+                                <div class="ba-point-text">
+                                    <h4>Emotional Connection</h4>
+                                    <p>Archetypes tap into universal human emotions, creating deeper customer bonds beyond product features and pricing.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ba-point">
+                                <div class="ba-point-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                </div>
+                                <div class="ba-point-text">
+                                    <h4>Brand Consistency</h4>
+                                    <p>Provides a framework for consistent messaging across all touchpoints—website, ads, social media, and sales conversations.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ba-point">
+                                <div class="ba-point-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                </div>
+                                <div class="ba-point-text">
+                                    <h4>Market Differentiation</h4>
+                                    <p>In crowded markets like EOR/HR, archetypes help brands stand out from competitors through distinctive personality.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="ba-point">
+                                <div class="ba-point-icon">
+                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                </div>
+                                <div class="ba-point-text">
+                                    <h4>Trust & Loyalty</h4>
+                                    <p>Consistent archetypal expression builds familiarity and trust over time, turning customers into advocates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ba-why-sidebar">
+                            <h4 class="ba-sidebar-title">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                Core Insight
+                            </h4>
+                            <p class="ba-core-quote">Brands that tap into universal human motivations and archetypal energies create lasting emotional bonds that transcend product features and pricing.</p>
+                            <p class="ba-source">— Based on Jungian Psychology & Consumer Research</p>
+                            
+                            <div class="ba-stats-grid">
+                                <div class="ba-stat-item">
+                                    <div class="ba-stat-value">52%</div>
+                                    <div class="ba-stat-label">More valuable customers when emotionally connected</div>
+                                </div>
+                                <div class="ba-stat-item">
+                                    <div class="ba-stat-value">3x</div>
+                                    <div class="ba-stat-label">Higher brand recall with clear archetypes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="dashboard-grid">
                     <div class="card" style="grid-column: span 2; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); padding: 32px;">
                         <h2 class="card-title">Complete Archetype Framework</h2>
