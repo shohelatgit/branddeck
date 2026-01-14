@@ -21,7 +21,7 @@
         .metric-cards-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+            gap: 20px;
         }
         
         .metric-card {
@@ -31,15 +31,15 @@
             padding: 20px;
         }
         
-        .competitor-matrix-full {
-            width: 100%;
-            margin: 24px 0;
+        .metrics-combined-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
         }
         
-        .matrix-container {
-            width: 100%;
-            max-width: calc(100% - 48px);
-            margin: 0 auto;
+        .matrix-row {
+            grid-column: span 2;
         }
         
         .right-column {
@@ -345,7 +345,6 @@
                                 <span class="axis-range range-low-y">LOW</span>
                                 <span class="axis-range range-high-y">HIGH</span>
                                 
-                                <!-- Company Markers -->
                                 <div class="company-marker" style="left: calc(50px + 70% * 0.3333); bottom: calc(40px + 80% * 0.3333);">
                                     <div class="marker-tooltip">
                                         <span class="tooltip-title">Deel</span>
@@ -353,6 +352,230 @@
                                         <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
                                         <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>88</span></div>
                                     </div>
+                                    <div class="marker-logo deel">D</div>
+                                    <div class="marker-label">Deel</div>
+                                </div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 80% * 0.3333); bottom: calc(40px + 55% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Rippling</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>78</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-purple);">R</div>
+                                    <div class="marker-label">Rippling</div>
+                                </div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 25% * 0.3333); bottom: calc(40px + 90% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Gusto</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>65</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-orange);">G</div>
+                                    <div class="marker-label">Gusto</div>
+                                </div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 50% * 0.3333); bottom: calc(40px + 50% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Remote.com</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>52</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-emerald);">Rc</div>
+                                    <div class="marker-label">Remote</div>
+                                </div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 85% * 0.3333); bottom: calc(40px + 30% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Papaya Global</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Low</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>47</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-pink);">P</div>
+                                    <div class="marker-label">Papaya</div>
+                                </div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 30% * 0.3333); bottom: calc(40px + 70% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Oyster HR</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>New</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-red);">O</div>
+                                    <div class="marker-label">Oyster</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="metrics-combined-card">
+                            <h2 class="card-title">Remote.com Metrics</h2>
+                            <div class="metric-cards-row">
+                                <div class="metric-card">
+                                    <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 12px;">
+                                        Google Ratings
+                                    </h3>
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <span style="font-size: 28px; font-weight: 700; color: #1f2937;">4.7</span>
+                                        <span style="font-size: 20px; color: #fbbf24;">★★★★½</span>
+                                    </div>
+                                    <div style="font-size: 12px; color: #6b7280;">2,768 reviews (Trustpilot)</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 12px;">
+                                        Facebook Followers
+                                    </h3>
+                                    <div style="font-size: 28px; font-weight: 700; color: #1f2937;">—</div>
+                                    <div style="font-size: 12px; color: #6b7280;">Not retrieved</div>
+                                    <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">facebook.com/remote</div>
+                                </div>
+                                <div class="metric-card">
+                                    <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 12px;">
+                                        SEO Score
+                                    </h3>
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <span style="font-size: 28px; font-weight: 700; color: #10b981;">56</span>
+                                        <span style="font-size: 14px; color: #6b7280;">/100</span>
+                                    </div>
+                                    <div style="height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                                        <div style="height: 100%; width: 56%; background: #10b981;"></div>
+                                    </div>
+                                    <div style="font-size: 11px; color: #9ca3af;">Authority Score (Semrush)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="right-column">
+                        <div class="card">
+                            <h2 class="card-title">Market Movements</h2>
+                            <div class="movement-item">
+                                <div class="movement-header">
+                                    <span class="status-badge status-gaining">Gaining</span>
+                                    <span class="movement-val val-green">+12%</span>
+                                </div>
+                                <h3 class="movement-title">Remote.com</h3>
+                                <p class="movement-desc">Up 12% in 'EOR platform' queries</p>
+                            </div>
+                            <div class="movement-item">
+                                <div class="movement-header">
+                                    <span class="status-badge status-losing">Losing</span>
+                                    <span class="movement-val val-red">-8%</span>
+                                </div>
+                                <h3 class="movement-title">Gusto</h3>
+                                <p class="movement-desc">Down 8% in 'payroll software' queries</p>
+                            </div>
+                            <div class="movement-item">
+                                <div class="movement-header">
+                                    <span class="status-badge status-new">New</span>
+                                    <span class="movement-val val-blue">New</span>
+                                </div>
+                                <h3 class="movement-title">Oyster HR</h3>
+                                <p class="movement-desc">First appeared in AI responses this week</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h2 class="card-title">Competitor Summary</h2>
+                            <div style="font-size: 13px; line-height: 1.6; color: #4b5563;">
+                                <p style="margin-bottom: 12px;"><strong>Market Dynamics:</strong> The EOR/HR platform market shows clear segmentation between premium enterprise solutions (Deel, Rippling, Papaya) and SMB-focused platforms (Gusto, Oyster).</p>
+                                <p style="margin-bottom: 12px;"><strong>Deel Position:</strong> Positioned as a premium solution with high affordability, offering strong value for enterprise clients seeking global compliance.</p>
+                                <p><strong>Emerging Threat:</strong> Oyster HR gaining traction in freelancer segment with competitive pricing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="matrix-row">
+                        <div class="card">
+                            <h2 class="card-title">Competitor Overview Matrix</h2>
+                            <p style="font-size: 13px; color: #6b7280; margin-bottom: 16px;">Detailed comparison of key EOR/HR platform competitors</p>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                                    <thead>
+                                        <tr style="background: #f3f4f6;">
+                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Company</th>
+                                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e5e7eb;">Year</th>
+                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">CEO/Founder</th>
+                                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e5e7eb;">Location</th>
+                                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e5e7eb;">Employees</th>
+                                            <th style="padding: 12px; text-align: right; border-bottom: 2px solid #e5e7eb;">Est Revenue</th>
+                                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e5e7eb;">Authority</th>
+                                            <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e5e7eb;">Backlinks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                                            <td style="padding: 12px; font-weight: 600;">Deel</td>
+                                            <td style="padding: 12px; text-align: center;">2019</td>
+                                            <td style="padding: 12px;">Alex Bouaziz</td>
+                                            <td style="padding: 12px;">San Francisco, USA</td>
+                                            <td style="padding: 12px; text-align: center;">1,000+</td>
+                                            <td style="padding: 12px; text-align: right;">$500M+</td>
+                                            <td style="padding: 12px; text-align: center;">56</td>
+                                            <td style="padding: 12px; text-align: center;">24.5K*</td>
+                                        </tr>
+                                        <tr style="background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                                            <td style="padding: 12px; font-weight: 600;">Rippling</td>
+                                            <td style="padding: 12px; text-align: center;">2016</td>
+                                            <td style="padding: 12px;">Parker Conrad</td>
+                                            <td style="padding: 12px;">San Francisco, USA</td>
+                                            <td style="padding: 12px; text-align: center;">3,630+</td>
+                                            <td style="padding: 12px; text-align: right;">$350M*</td>
+                                            <td style="padding: 12px; text-align: center;">31</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                                            <td style="padding: 12px; font-weight: 600;">Gusto</td>
+                                            <td style="padding: 12px; text-align: center;">2012</td>
+                                            <td style="padding: 12px;">Josh Reeves</td>
+                                            <td style="padding: 12px;">San Francisco, USA</td>
+                                            <td style="padding: 12px; text-align: center;">1,000+</td>
+                                            <td style="padding: 12px; text-align: right;">$500M*</td>
+                                            <td style="padding: 12px; text-align: center;">56</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                        </tr>
+                                        <tr style="background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                                            <td style="padding: 12px; font-weight: 600;">Remote.com</td>
+                                            <td style="padding: 12px; text-align: center;">2019</td>
+                                            <td style="padding: 12px;">Job van der Voort</td>
+                                            <td style="padding: 12px;">San Francisco, USA</td>
+                                            <td style="padding: 12px; text-align: center;">2,500+</td>
+                                            <td style="padding: 12px; text-align: right;">$506M*</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                        </tr>
+                                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                                            <td style="padding: 12px; font-weight: 600;">Papaya Global</td>
+                                            <td style="padding: 12px; text-align: center;">2016</td>
+                                            <td style="padding: 12px;">Eyal Shifroni</td>
+                                            <td style="padding: 12px;">New York, USA</td>
+                                            <td style="padding: 12px; text-align: center;">800+</td>
+                                            <td style="padding: 12px; text-align: right;">$145M*</td>
+                                            <td style="padding: 12px; text-align: center;">33</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                        </tr>
+                                        <tr style="background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                                            <td style="padding: 12px; font-weight: 600;">Oyster HR</td>
+                                            <td style="padding: 12px; text-align: center;">2020</td>
+                                            <td style="padding: 12px;">Tony Jamous</td>
+                                            <td style="padding: 12px;">New York, USA</td>
+                                            <td style="padding: 12px; text-align: center;">400+</td>
+                                            <td style="padding: 12px; text-align: right;">$112M*</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                            <td style="padding: 12px; text-align: center;">—</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p style="font-size: 11px; color: #9ca3af; margin-top: 12px;">Data sources: PitchBook, Crunchbase, Semrush, LinkedIn | *Estimated values | Last updated: January 2025</p>
+                        </div>
+                    </div>
+                </div>
                                     <div class="marker-logo deel">D</div>
                                     <div class="marker-label">Deel</div>
                                 </div>
@@ -575,9 +798,8 @@
                             </div>
                             <p style="font-size: 11px; color: #9ca3af; margin-top: 12px;">Data sources: PitchBook, Crunchbase, Semrush, LinkedIn | *Estimated values | Last updated: January 2025</p>
                         </div>
+                </div>
         </div>
-    </div>
-
     </div>
 
 </body>
