@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legal & Compliance | Competitor Analysis Dashboard</title>
     <link rel="stylesheet" href="../components/common.css">
+    <style>
+        .pestel-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+        
+        .pestel-card {
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .pestel-card h3 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        
+        .pestel-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+        
+        .pestel-card ul li {
+            margin-bottom: 5px;
+        }
+    </style>
     <script>
         function setActiveLink() {
             const currentPath = window.location.pathname.split('/').pop();
@@ -109,6 +140,84 @@
                     </div>
                 </div>
                 <div class="dashboard-grid">
+                    <div class="card" style="grid-column: span 2;">
+                        <h2 class="card-title">Risk Assessment Matrix</h2>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 600; color: #dc2626; margin-bottom: 8px;">HIGH</div>
+                                <div style="font-size: 12px;">Regulatory Changes</div>
+                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: Legal team monitoring</div>
+                            </div>
+                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 600; color: #f59e0b; margin-bottom: 8px;">MEDIUM</div>
+                                <div style="font-size: 12px;">Data Security</div>
+                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: SOC 2 compliance</div>
+                            </div>
+                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 600; color: #f59e0b; margin-bottom: 8px;">MEDIUM</div>
+                                <div style="font-size: 12px;">Third-party Dependencies</div>
+                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: Multiple providers</div>
+                            </div>
+                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 600; color: #16a34a; margin-bottom: 8px;">LOW</div>
+                                <div style="font-size: 12px;">Market Competition</div>
+                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: Product differentiation</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="grid-column: span 2;">
+                        <h2 class="card-title">PESTEL Analysis</h2>
+                        <div class="pestel-grid">
+                            <div class="pestel-card" style="background: #dbeafe;">
+                                <h3 style="color: #1d4ed8;">Political</h3>
+                                <ul style="color: #374151;">
+                                    <li style="margin-bottom: 5px;">• Labor law changes in key markets</li>
+                                    <li style="margin-bottom: 5px;">• International trade policies impacting remote work</li>
+                                    <li>• Geopolitical stability affecting global hiring</li>
+                                </ul>
+                            </div>
+                            <div class="pestel-card" style="background: #d1fae5;">
+                                <h3 style="color: #065f46;">Economic</h3>
+                                <ul style="color: #374151;">
+                                    <li style="margin-bottom: 5px;">• EOR market racing toward $9.2B by 2033</li>
+                                    <li style="margin-bottom: 5px;">• Inflation impacting global payroll strategies</li>
+                                    <li>• Currency fluctuation risks in cross-border payments</li>
+                                </ul>
+                            </div>
+                            <div class="pestel-card" style="background: #f3e8ff;">
+                                <h3 style="color: #7c3aed;">Social</h3>
+                                <ul style="color: #374151;">
+                                    <li style="margin-bottom: 5px;">• Remote work adoption accelerating globally</li>
+                                    <li style="margin-bottom: 5px;">• Gig economy growth driving contractor demand</li>
+                                    <li>• Skills shortage driving talent mobility</li>
+                                </ul>
+                            </div>
+                            <div class="pestel-card" style="background: #ffedd5;">
+                                <h3 style="color: #c2410c;">Technological</h3>
+                                <ul style="color: #374151;">
+                                    <li style="margin-bottom: 5px;">• AI-driven compliance automation emerging</li>
+                                    <li style="margin-bottom: 5px;">• Generative AI revolutionizing HR processes</li>
+                                    <li>• Data security technology advancing rapidly</li>
+                                </ul>
+                            </div>
+                            <div class="pestel-card" style="background: #fce7f3;">
+                                <h3 style="color: #be185d;">Environmental</h3>
+                                <ul style="color: #374151;">
+                                    <li style="margin-bottom: 5px;">• ESG compliance becoming mandatory in EU</li>
+                                    <li style="margin-bottom: 5px;">• Carbon footprint tracking for distributed teams</li>
+                                    <li>• Green HR practices gaining traction</li>
+                                </ul>
+                            </div>
+                            <div class="pestel-card" style="background: #fee2e2;">
+                                <h3 style="color: #b91c1c;">Legal</h3>
+                                <ul style="color: #374151;">
+                                    <li style="margin-bottom: 5px;">• 8 states rolling out new privacy laws in 2025</li>
+                                    <li style="margin-bottom: 5px;">• Cross-border payment regulations tightening</li>
+                                    <li>• AI employment decision regulations expanding</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <h2 class="card-title">Compliance Status</h2>
                         <div class="compliance-item" style="margin-bottom: 16px;">
@@ -169,32 +278,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card" style="grid-column: span 2;">
-                        <h2 class="card-title">Risk Assessment Matrix</h2>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 600; color: #dc2626; margin-bottom: 8px;">HIGH</div>
-                                <div style="font-size: 12px;">Regulatory Changes</div>
-                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: Legal team monitoring</div>
-                            </div>
-                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 600; color: #f59e0b; margin-bottom: 8px;">MEDIUM</div>
-                                <div style="font-size: 12px;">Data Security</div>
-                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: SOC 2 compliance</div>
-                            </div>
-                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 600; color: #f59e0b; margin-bottom: 8px;">MEDIUM</div>
-                                <div style="font-size: 12px;">Third-party Dependencies</div>
-                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: Multiple providers</div>
-                            </div>
-                            <div style="padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 600; color: #16a34a; margin-bottom: 8px;">LOW</div>
-                                <div style="font-size: 12px;">Market Competition</div>
-                                <div style="font-size: 10px; color: #6b7280; margin-top: 4px;">Mitigation: Product differentiation</div>
-                            </div>
-                        </div>
-                    </div>
-                
+                </div>
         </div>
     </div>
 
