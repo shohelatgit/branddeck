@@ -21,28 +21,28 @@
     padding: 0;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-gray);
+.monitor {
+    width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: var(--bg-gray);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-dark);
 }
 
 /* --- Main Window Container --- */
 .window-frame {
-    width: 90%;
-    max-width: 1200px;
-    height: 800px;
+    width: 100%;
+    height: 100%;
+    display: flex;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    display: flex;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    margin: 0 auto;
 }
 
 /* --- Sidebar --- */
