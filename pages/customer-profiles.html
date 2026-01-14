@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Profiles | Competitor Analysis Dashboard</title>
     <link rel="stylesheet" href="../components/common.css">
+    <style>
+        .customer-profiles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+    </style>
     <script>
         function setActiveLink() {
             const currentPath = window.location.pathname.split('/').pop();
@@ -108,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-grid">
+                <div class="customer-profiles-grid">
                     <div class="card">
                         <h2 class="card-title">Sarah Chen - Startup Founder</h2>
                         <div style="display: flex; align-items: center; margin-bottom: 16px;">
