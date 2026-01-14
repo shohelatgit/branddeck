@@ -9,7 +9,32 @@
         .competitor-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 24px;
+            gap: 20px;
+        }
+        
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .metric-cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .metric-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
         
         .xy-graph-card {
@@ -291,101 +316,95 @@
                     </div>
                 </div>
                 <div class="competitor-grid">
-                    <div class="xy-graph-card" style="grid-column: span 1;">
-                        <h2 class="card-title">Price vs Affordability Analysis</h2>
-                        <p style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Positioning of key EOR/HR platform competitors</p>
-                        <div class="xy-graph-container">
-                            <div class="xy-grid"></div>
-                            
-                            <div class="xy-axis xy-axis-x"></div>
-                            <div class="xy-axis xy-axis-y"></div>
-                            
-                            <span class="axis-label axis-label-price">Price</span>
-                            <span class="axis-label axis-label-affordability">Affordability</span>
-                            
-                            <span class="axis-range range-low-x">LOW</span>
-                            <span class="axis-range range-high-x">HIGH</span>
-                            <span class="axis-range range-low-y">LOW</span>
-                            <span class="axis-range range-high-y">HIGH</span>
-                            
-                            <!-- Company Markers - positioned within grid area (inset 40px 30px 40px 50px) -->
-                            
-                            <!-- Deel - Premium Price (75%) / High Affordability (80%) -->
-                            <div class="company-marker" style="left: calc(50px + 70% * 0.3333); bottom: calc(40px + 80% * 0.3333);">
-                                <div class="marker-tooltip">
-                                    <span class="tooltip-title">Deel</span>
-                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Premium</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>88</span></div>
+                    <div class="left-column">
+                        <div class="xy-graph-card">
+                            <h2 class="card-title">Price vs Affordability Analysis</h2>
+                            <p style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Positioning of key EOR/HR platform competitors</p>
+                            <div class="xy-graph-container">
+                                <div class="xy-grid"></div>
+                                
+                                <div class="xy-axis xy-axis-x"></div>
+                                <div class="xy-axis xy-axis-y"></div>
+                                
+                                <span class="axis-label axis-label-price">Price</span>
+                                <span class="axis-label axis-label-affordability">Affordability</span>
+                                
+                                <span class="axis-range range-low-x">LOW</span>
+                                <span class="axis-range range-high-x">HIGH</span>
+                                <span class="axis-range range-low-y">LOW</span>
+                                <span class="axis-range range-high-y">HIGH</span>
+                                
+                                <!-- Company Markers -->
+                                <div class="company-marker" style="left: calc(50px + 70% * 0.3333); bottom: calc(40px + 80% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Deel</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Premium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>88</span></div>
+                                    </div>
+                                    <div class="marker-logo deel">D</div>
+                                    <div class="marker-label">Deel</div>
                                 </div>
-                                <div class="marker-logo deel">D</div>
-                                <div class="marker-label">Deel</div>
-                            </div>
-                            
-                            <!-- Rippling - High Price (85%) / Medium Affordability (55%) -->
-                            <div class="company-marker" style="left: calc(50px + 80% * 0.3333); bottom: calc(40px + 55% * 0.3333);">
-                                <div class="marker-tooltip">
-                                    <span class="tooltip-title">Rippling</span>
-                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>78</span></div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 80% * 0.3333); bottom: calc(40px + 55% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Rippling</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>78</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-purple);">R</div>
+                                    <div class="marker-label">Rippling</div>
                                 </div>
-                                <div class="marker-logo standard" style="background: var(--color-purple);">R</div>
-                                <div class="marker-label">Rippling</div>
-                            </div>
-                            
-                            <!-- Gusto - Low Price (25%) / High Affordability (90%) -->
-                            <div class="company-marker" style="left: calc(50px + 25% * 0.3333); bottom: calc(40px + 90% * 0.3333);">
-                                <div class="marker-tooltip">
-                                    <span class="tooltip-title">Gusto</span>
-                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>65</span></div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 25% * 0.3333); bottom: calc(40px + 90% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Gusto</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>65</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-orange);">G</div>
+                                    <div class="marker-label">Gusto</div>
                                 </div>
-                                <div class="marker-logo standard" style="background: var(--color-orange);">G</div>
-                                <div class="marker-label">Gusto</div>
-                            </div>
-                            
-                            <!-- Remote.com - Medium Price (50%) / Medium Affordability (50%) -->
-                            <div class="company-marker" style="left: calc(50px + 50% * 0.3333); bottom: calc(40px + 50% * 0.3333);">
-                                <div class="marker-tooltip">
-                                    <span class="tooltip-title">Remote.com</span>
-                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Medium</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>52</span></div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 50% * 0.3333); bottom: calc(40px + 50% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Remote.com</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>52</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-emerald);">Rc</div>
+                                    <div class="marker-label">Remote</div>
                                 </div>
-                                <div class="marker-logo standard" style="background: var(--color-emerald);">Rc</div>
-                                <div class="marker-label">Remote</div>
-                            </div>
-                            
-                            <!-- Papaya Global - High Price (90%) / Low Affordability (30%) -->
-                            <div class="company-marker" style="left: calc(50px + 85% * 0.3333); bottom: calc(40px + 30% * 0.3333);">
-                                <div class="marker-tooltip">
-                                    <span class="tooltip-title">Papaya Global</span>
-                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Low</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>47</span></div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 85% * 0.3333); bottom: calc(40px + 30% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Papaya Global</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Low</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>47</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-pink);">P</div>
+                                    <div class="marker-label">Papaya</div>
                                 </div>
-                                <div class="marker-logo standard" style="background: var(--color-pink);">P</div>
-                                <div class="marker-label">Papaya</div>
-                            </div>
-                            
-                            <!-- Oyster HR - Low Price (30%) / Medium Affordability (70%) -->
-                            <div class="company-marker" style="left: calc(50px + 30% * 0.3333); bottom: calc(40px + 70% * 0.3333);">
-                                <div class="marker-tooltip">
-                                    <span class="tooltip-title">Oyster HR</span>
-                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
-                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>New</span></div>
+                                
+                                <div class="company-marker" style="left: calc(50px + 30% * 0.3333); bottom: calc(40px + 70% * 0.3333);">
+                                    <div class="marker-tooltip">
+                                        <span class="tooltip-title">Oyster HR</span>
+                                        <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                        <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>New</span></div>
+                                    </div>
+                                    <div class="marker-logo standard" style="background: var(--color-red);">O</div>
+                                    <div class="marker-label">Oyster</div>
                                 </div>
-                                <div class="marker-logo standard" style="background: var(--color-red);">O</div>
-                                <div class="marker-label">Oyster</div>
                             </div>
                         </div>
-                    </div>
-                    <div style="margin-top: 24px;">
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                            <div style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px;">
+                        
+                        <div class="metric-cards-row">
+                            <div class="metric-card">
                                 <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 12px;">
                                     Google Ratings
                                 </h3>
@@ -395,7 +414,7 @@
                                 </div>
                                 <div style="font-size: 12px; color: #6b7280;">2,768 reviews (Trustpilot)</div>
                             </div>
-                            <div style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px;">
+                            <div class="metric-card">
                                 <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 12px;">
                                     Facebook Followers
                                 </h3>
@@ -403,7 +422,7 @@
                                 <div style="font-size: 12px; color: #6b7280;">Not retrieved</div>
                                 <div style="font-size: 11px; color: #9ca3af; margin-top: 4px;">facebook.com/remote</div>
                             </div>
-                            <div style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px;">
+                            <div class="metric-card">
                                 <h3 style="font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; margin-bottom: 12px;">
                                     SEO Score
                                 </h3>
@@ -417,11 +436,9 @@
                                 <div style="font-size: 11px; color: #9ca3af;">Authority Score (Semrush)</div>
                             </div>
                         </div>
-                        <div style="font-size: 11px; color: #9ca3af; margin-top: 12px; text-align: center;">
-                            Data sources: Trustpilot, Semrush, SimilarWeb | Last updated: January 2025
-                        </div>
                     </div>
-                    <div style="display: flex; flex-direction: column; gap: 24px;">
+                    
+                    <div class="right-column">
                         <div class="card">
                             <h2 class="card-title">Market Movements</h2>
                             <div class="movement-item">
@@ -449,6 +466,7 @@
                                 <p class="movement-desc">First appeared in AI responses this week</p>
                             </div>
                         </div>
+                        
                         <div class="card">
                             <h2 class="card-title">Competitor Summary</h2>
                             <div style="font-size: 13px; line-height: 1.6; color: #4b5563;">
