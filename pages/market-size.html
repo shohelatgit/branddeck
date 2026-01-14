@@ -110,24 +110,58 @@
                 </div>
                 <div class="dashboard-grid">
                     <div class="card" style="grid-column: span 2;">
-                        <h2 class="card-title">Market Size Breakdown</h2>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px;">
-                            <div style="text-align: center; padding: 24px; border: 2px solid var(--primary-blue); border-radius: 12px;">
-                                <div style="font-size: 32px; font-weight: 700; color: var(--primary-blue); margin-bottom: 8px;">$500B</div>
-                                <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Total Addressable Market</div>
-                                <div style="font-size: 12px; color: #9ca3af;">Global workforce management</div>
+                        <h2 class="card-title">Market Size</h2>
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 0; margin-bottom: 32px; position: relative;">
+                            <div style="width: 280px; height: 280px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #1d4ed8; margin-bottom: 8px;">TAM</div>
+                                    <div style="font-size: 32px; font-weight: 700; color: #1d4ed8; margin-bottom: 4px;">$500B</div>
+                                    <div style="font-size: 11px; color: #6b7280;">Total Addressable Market</div>
+                                </div>
                             </div>
-                            <div style="text-align: center; padding: 24px; border: 2px solid var(--color-emerald); border-radius: 12px;">
-                                <div style="font-size: 32px; font-weight: 700; color: var(--color-emerald); margin-bottom: 8px;">$50B</div>
-                                <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Serviceable Addressable Market</div>
-                                <div style="font-size: 12px; color: #9ca3af;">HR tech solutions</div>
+                            <div style="width: 220px; height: 220px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; margin-top: -60px; z-index: 2; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #065f46; margin-bottom: 8px;">SAM</div>
+                                    <div style="font-size: 28px; font-weight: 700; color: #065f46; margin-bottom: 4px;">$50B</div>
+                                    <div style="font-size: 11px; color: #6b7280;">Serviceable Addressable Market</div>
+                                </div>
                             </div>
-                            <div style="text-align: center; padding: 24px; border: 2px solid var(--color-purple); border-radius: 12px;">
-                                <div style="font-size: 32px; font-weight: 700; color: var(--color-purple); margin-bottom: 8px;">$5B</div>
-                                <div style="font-size: 14px; color: #6b7280; margin-bottom: 4px;">Serviceable Obtainable Market</div>
-                                <div style="font-size: 12px; color: #9ca3af;">Global payroll platforms</div>
+                            <div style="width: 160px; height: 160px; background: #f3e8ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; margin-top: -45px; z-index: 3; box-shadow: 0 4px 20px rgba(147, 51, 234, 0.15);">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #7c3aed; margin-bottom: 4px;">SOM</div>
+                                    <div style="font-size: 22px; font-weight: 700; color: #7c3aed; margin-bottom: 4px;">$5B</div>
+                                    <div style="font-size: 10px; color: #6b7280;">Serviceable Obtainable Market</div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title">Market Calculations</h2>
+                        <div style="font-size: 13px; line-height: 1.8;">
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="font-size: 13px; font-weight: 600; color: #1d4ed8; margin-bottom: 8px;">TAM Calculation</h4>
+                                <ul style="list-style: disc; padding-left: 18px; color: #4b5563;">
+                                    <li style="margin-bottom: 4px;">Total global workforce × average HR spend per employee × digital transformation factor</li>
+                                    <li style="margin-bottom: 4px;">Assumptions: 3.5B global workforce, $2,500 avg HR spend, 5x digital multiplier</li>
+                                </ul>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <h4 style="font-size: 13px; font-weight: 600; color: #065f46; margin-bottom: 8px;">SAM Calculation</h4>
+                                <ul style="list-style: disc; padding-left: 18px; color: #4b5563;">
+                                    <li style="margin-bottom: 4px;">TAM × technology adoption rate × competitive landscape share</li>
+                                    <li style="margin-bottom: 4px;">Assumptions: 10% tech adoption rate, 10% competitive share</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 style="font-size: 13px; font-weight: 600; color: #7c3aed; margin-bottom: 8px;">SOM Calculation</h4>
+                                <ul style="list-style: disc; padding-left: 18px; color: #4b5563;">
+                                    <li style="margin-bottom: 4px;">SAM × Deel's target market segments × achievable market penetration</li>
+                                    <li>Assumptions: 50% target segments, 20% achievable penetration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="grid-column: span 2;">
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                             <div>
                                 <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px;">Growth Projections</h3>
@@ -194,15 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <h2 class="card-title">Market Methodology</h2>
-                        <div style="font-size: 14px; line-height: 1.6;">
-                            <p><strong>TAM Calculation:</strong> Total global workforce × average HR spend per employee × digital transformation factor</p>
-                            <p><strong>SAM Approach:</strong> TAM × technology adoption rate × competitive landscape share</p>
-                            <p><strong>SOM Strategy:</strong> SAM × Deel's target market segments × achievable market penetration</p>
-                        </div>
-                    </div>
-                
+                </div>
         </div>
     </div>
 
