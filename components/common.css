@@ -33,7 +33,7 @@ body {
 
 /* --- Main Window Container --- */
 .window-frame {
-    width: 100%;
+    width: 90%;
     max-width: 1200px;
     height: 800px;
     background: #fff;
@@ -42,6 +42,7 @@ body {
     display: flex;
     border: 1px solid var(--border-color);
     overflow: hidden;
+    margin: 0 auto;
 }
 
 /* --- Sidebar --- */
