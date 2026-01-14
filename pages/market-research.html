@@ -19,37 +19,38 @@
         document.addEventListener('DOMContentLoaded', setActiveLink);
     </script>
     <style>
-        .dashboard-grid {
-            overflow-x: hidden;
-            max-width: 100%;
-        }
-        .chart-container {
-            position: relative;
-            height: 200px;
-            overflow: hidden;
-        }
-        .chart-row {
+        .charts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
-        .chart-card {
+        .chart-wrapper {
             background: white;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
             padding: 16px;
-            overflow: hidden;
         }
-        .chart-card h3 {
+        .chart-wrapper h3 {
             font-size: 13px;
             font-weight: 600;
             color: #1f2937;
             margin-bottom: 12px;
         }
+        .chart-box {
+            position: relative;
+            height: 180px;
+        }
+        .sources-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+        }
         .sources-list {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
         .sources-list li {
             padding: 10px 14px;
@@ -168,116 +169,114 @@
         </div>
         <div class="main-content">
 
-                <div class="header">
-                    <div>
-                        <h1>Market Research</h1>
-                        <p>Data-driven insights into the HR tech and global payroll market.</p>
+            <div class="header">
+                <div>
+                    <h1>Market Research</h1>
+                    <p>Data-driven insights into the HR tech and global payroll market.</p>
+                </div>
+                <div class="header-badges">
+                    <div class="live-badge">
+                        <span class="dot-green"></span> Live Demo
                     </div>
-                    <div class="header-badges">
-                        <div class="live-badge">
-                            <span class="dot-green"></span> Live Demo
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="charts-grid">
+                    <div class="chart-wrapper">
+                        <h3>HR Tech Market Size by Year ($B)</h3>
+                        <div class="chart-box">
+                            <canvas id="marketSizeChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Global Payroll Platform Market Share</h3>
+                        <div class="chart-box">
+                            <canvas id="marketShareChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Remote Work Adoption Trend (%)</h3>
+                        <div class="chart-box">
+                            <canvas id="remoteWorkChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Company Size Segmentation</h3>
+                        <div class="chart-box">
+                            <canvas id="companySizeChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>AI Adoption in HR Tech (%)</h3>
+                        <div class="chart-box">
+                            <canvas id="aiAdoptionChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>Customer Satisfaction by Platform</h3>
+                        <div class="chart-box">
+                            <canvas id="csatChart"></canvas>
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="chart-row">
-                        <div class="chart-card">
-                            <h3>HR Tech Market Size by Year ($B)</h3>
-                            <div class="chart-container">
-                                <canvas id="marketSizeChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-card">
-                            <h3>Global Payroll Platform Market Share</h3>
-                            <div class="chart-container">
-                                <canvas id="marketShareChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart-row">
-                        <div class="chart-card">
-                            <h3>Remote Work Adoption Trend (%)</h3>
-                            <div class="chart-container">
-                                <canvas id="remoteWorkChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-card">
-                            <h3>Company Size Segmentation</h3>
-                            <div class="chart-container">
-                                <canvas id="companySizeChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chart-row">
-                        <div class="chart-card">
-                            <h3>AI Adoption in HR Tech (%)</h3>
-                            <div class="chart-container">
-                                <canvas id="aiAdoptionChart"></canvas>
-                            </div>
-                        </div>
-                        <div class="chart-card">
-                            <h3>Customer Satisfaction by Platform</h3>
-                            <div class="chart-container">
-                                <canvas id="csatChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h2 class="card-title">Sources & References</h2>
-                        <ul class="sources-list">
-                            <li>
-                                <span class="source-number">1</span>
-                                <div class="source-title">Global Payroll 2024 Buyers Guide Executive Summary</div>
-                                <div class="source-meta">ISG Research | December 2024 | <a href="https://research.isg-one.com/buyers-guide/human_capital_management/global_payroll/2024" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">2</span>
-                                <div class="source-title">Multicountry Payroll 2024 Buyers Guide Executive Summary</div>
-                                <div class="source-meta">ISG Research | December 2024 | <a href="https://research.isg-one.com/buyers-guide/human_capital_management/multicountry_payroll/2024" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">3</span>
-                                <div class="source-title">2024 Gartner Market Guide for Multicountry Payroll Solutions</div>
-                                <div class="source-meta">UKG/Gartner | March 2024 | <a href="https://www.ukg.com/resources/analyst-report/2024-gartner-market-guide-multicountry-payroll-solutions" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">4</span>
-                                <div class="source-title">Worldwide HCM & Payroll Applications Forecast 2024-2028</div>
-                                <div class="source-meta">IDC Research | October 2024 | <a href="https://www.marketresearch.com/IDC-v2477/Worldwide-Human-Capital-Management-Payroll-38530776/" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">5</span>
-                                <div class="source-title">Worldwide HCM & Payroll Applications Forecast 2024-2028</div>
-                                <div class="source-meta">GII Research | October 2024 | <a href="https://www.giiresearch.com/report/id1573625-worldwide-human-capital-management-payroll.html" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">6</span>
-                                <div class="source-title">ISG ProviderLens Quadrant Report - Payroll Solutions and Services</div>
-                                <div class="source-meta">Mercans | September 2024 | <a href="https://mercans.com/wp-content/uploads/2024/09/Mercans-Global-Payroll-Services-2024.pdf" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">7</span>
-                                <div class="source-title">2025 Global Payroll Benchmarking Survey</div>
-                                <div class="source-meta">Deloitte | May 2025 | <a href="https://www2.deloitte.com/us/en/pages/human-capital/articles/payroll-operations-survey.html" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">8</span>
-                                <div class="source-title">2024 Payroll Tech Trends: Globalization, GenAI and On-Demand Pay</div>
-                                <div class="source-meta">SHRM | February 2024 | <a href="https://www.shrm.org/topics-tools/news/technology/2024-payroll-tech-trends-globalization-genai-ondemand-pay" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">9</span>
-                                <div class="source-title">Mercans is Global Leader in Payroll Tech for Second Year in ISG Report</div>
-                                <div class="source-meta">HR Tech Cube | October 2024 | <a href="https://hrtechcube.com/mercans-is-global-leader-in-payroll-tech-for-second-year-in-isg-report/" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                            <li>
-                                <span class="source-number">10</span>
-                                <div class="source-title">HR Trends Report</div>
-                                <div class="source-meta">Anvil | November 2024 | <a href="https://useanvil.com/forms/hr-technology/hr-trends-report" target="_blank" class="source-link">View Source</a></div>
-                            </li>
-                        </ul>
-                    </div>
+
+                <div class="sources-section">
+                    <h2 class="card-title">Sources & References</h2>
+                    <ul class="sources-list">
+                        <li>
+                            <span class="source-number">1</span>
+                            <div class="source-title">Global Payroll 2024 Buyers Guide Executive Summary</div>
+                            <div class="source-meta">ISG Research | December 2024 | <a href="https://research.isg-one.com/buyers-guide/human_capital_management/global_payroll/2024" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">2</span>
+                            <div class="source-title">Multicountry Payroll 2024 Buyers Guide Executive Summary</div>
+                            <div class="source-meta">ISG Research | December 2024 | <a href="https://research.isg-one.com/buyers-guide/human_capital_management/multicountry_payroll/2024" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">3</span>
+                            <div class="source-title">2024 Gartner Market Guide for Multicountry Payroll Solutions</div>
+                            <div class="source-meta">UKG/Gartner | March 2024 | <a href="https://www.ukg.com/resources/analyst-report/2024-gartner-market-guide-multicountry-payroll-solutions" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">4</span>
+                            <div class="source-title">Worldwide HCM & Payroll Applications Forecast 2024-2028</div>
+                            <div class="source-meta">IDC Research | October 2024 | <a href="https://www.marketresearch.com/IDC-v2477/Worldwide-Human-Capital-Management-Payroll-38530776/" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">5</span>
+                            <div class="source-title">Worldwide HCM & Payroll Applications Forecast 2024-2028</div>
+                            <div class="source-meta">GII Research | October 2024 | <a href="https://www.giiresearch.com/report/id1573625-worldwide-human-capital-management-payroll.html" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">6</span>
+                            <div class="source-title">ISG ProviderLens Quadrant Report - Payroll Solutions and Services</div>
+                            <div class="source-meta">Mercans | September 2024 | <a href="https://mercans.com/wp-content/uploads/2024/09/Mercans-Global-Payroll-Services-2024.pdf" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">7</span>
+                            <div class="source-title">2025 Global Payroll Benchmarking Survey</div>
+                            <div class="source-meta">Deloitte | May 2025 | <a href="https://www2.deloitte.com/us/en/pages/human-capital/articles/payroll-operations-survey.html" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">8</span>
+                            <div class="source-title">2024 Payroll Tech Trends: Globalization, GenAI and On-Demand Pay</div>
+                            <div class="source-meta">SHRM | February 2024 | <a href="https://www.shrm.org/topics-tools/news/technology/2024-payroll-tech-trends-globalization-genai-ondemand-pay" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">9</span>
+                            <div class="source-title">Mercans is Global Leader in Payroll Tech for Second Year in ISG Report</div>
+                            <div class="source-meta">HR Tech Cube | October 2024 | <a href="https://hrtechcube.com/mercans-is-global-leader-in-payroll-tech-for-second-year-in-isg-report/" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                        <li>
+                            <span class="source-number">10</span>
+                            <div class="source-title">HR Trends Report</div>
+                            <div class="source-meta">Anvil | November 2024 | <a href="https://useanvil.com/forms/hr-technology/hr-trends-report" target="_blank" class="source-link">View Source</a></div>
+                        </li>
+                    </ul>
                 </div>
+            </div>
         </div>
     </div>
 
