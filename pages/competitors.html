@@ -5,6 +5,185 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Competitor Analysis | Competitor Analysis Dashboard</title>
     <link rel="stylesheet" href="../components/common.css">
+    <style>
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+        }
+        
+        .xy-graph-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        .xy-graph-container {
+            position: relative;
+            height: 380px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+        
+        .xy-grid {
+            position: absolute;
+            inset: 40px 30px 40px 50px;
+            background-image: 
+                linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+                linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+            background-size: 33.33% 33.33%;
+        }
+        
+        .xy-axis {
+            position: absolute;
+            background: #374151;
+        }
+        
+        .xy-axis-x {
+            bottom: 40px;
+            left: 50px;
+            right: 30px;
+            height: 2px;
+        }
+        
+        .xy-axis-y {
+            left: 50px;
+            top: 40px;
+            bottom: 40px;
+            width: 2px;
+        }
+        
+        .axis-label {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .axis-label-price {
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .axis-label-affordability {
+            top: 50%;
+            left: 10px;
+            transform: rotate(-90deg) translateX(-50%);
+            transform-origin: left center;
+        }
+        
+        .axis-range {
+            position: absolute;
+            font-size: 10px;
+            color: #6b7280;
+        }
+        
+        .range-low-x { bottom: 18px; left: 55px; }
+        .range-high-x { bottom: 18px; right: 35px; }
+        .range-low-y { bottom: 15px; left: 20px; }
+        .range-high-y { top: 15px; left: 20px; }
+        
+        .company-marker {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .marker-logo {
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .company-marker:hover .marker-logo {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        }
+        
+        .marker-logo.deel {
+            width: 48px;
+            height: 48px;
+            font-size: 18px;
+            background: var(--primary-blue);
+            border: 3px solid #fbbf24;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        }
+        
+        .marker-logo.standard {
+            width: 38px;
+            height: 38px;
+            font-size: 14px;
+        }
+        
+        .marker-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: #374151;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+        
+        .marker-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            margin-bottom: 8px;
+            z-index: 20;
+        }
+        
+        .marker-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #1f2937;
+        }
+        
+        .company-marker:hover .marker-tooltip {
+            opacity: 1;
+        }
+        
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .tooltip-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 2px;
+        }
+        
+        .tooltip-label {
+            color: #9ca3af;
+        }
+    </style>
     <script>
         function setActiveLink() {
             const currentPath = window.location.pathname.split('/').pop();
@@ -111,118 +290,137 @@
                         </div>
                     </div>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="card" style="grid-column: span 1 / span 1; @media(min-width: 1024px) { grid-column: span 2; }">
-                        <h2 class="card-title">AI Visibility Leaderboard</h2>
-                        <div class="leaderboard-row highlight">
-                            <span class="rank-num">#1</span>
-                            <div class="company-logo" style="background-color: var(--primary-blue);">D</div>
-                            <div class="row-content">
-                                <div class="row-header">
-                                    <span class="company-name">Deel (You)</span>
-                                    <div class="score-box">
-                                        <span class="change pos">+3</span>
-                                        <span class="score-val">88</span>
-                                    </div>
+                <div class="competitor-grid">
+                    <div class="xy-graph-card" style="grid-column: span 1;">
+                        <h2 class="card-title">Price vs Affordability Analysis</h2>
+                        <p style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Positioning of key EOR/HR platform competitors</p>
+                        <div class="xy-graph-container">
+                            <div class="xy-grid"></div>
+                            
+                            <div class="xy-axis xy-axis-x"></div>
+                            <div class="xy-axis xy-axis-y"></div>
+                            
+                            <span class="axis-label axis-label-price">Price</span>
+                            <span class="axis-label axis-label-affordability">Affordability</span>
+                            
+                            <span class="axis-range range-low-x">LOW</span>
+                            <span class="axis-range range-high-x">HIGH</span>
+                            <span class="axis-range range-low-y">LOW</span>
+                            <span class="axis-range range-high-y">HIGH</span>
+                            
+                            <!-- Company Markers - positioned within grid area (inset 40px 30px 40px 50px) -->
+                            
+                            <!-- Deel - Premium Price (75%) / High Affordability (80%) -->
+                            <div class="company-marker" style="left: calc(50px + 70% * 0.3333); bottom: calc(40px + 80% * 0.3333);">
+                                <div class="marker-tooltip">
+                                    <span class="tooltip-title">Deel</span>
+                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Premium</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>88</span></div>
                                 </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill" style="width: 88%; background-color: var(--primary-blue);"></div>
-                                </div>
+                                <div class="marker-logo deel">D</div>
+                                <div class="marker-label">Deel</div>
                             </div>
-                        </div>
-                        <div class="leaderboard-row">
-                            <span class="rank-num">#2</span>
-                            <div class="company-logo" style="background-color: var(--color-purple);">R</div>
-                            <div class="row-content">
-                                <div class="row-header">
-                                    <span class="company-name">Rippling</span>
-                                    <div class="score-box">
-                                        <span class="change pos">+5</span>
-                                        <span class="score-val">78</span>
-                                    </div>
+                            
+                            <!-- Rippling - High Price (85%) / Medium Affordability (55%) -->
+                            <div class="company-marker" style="left: calc(50px + 80% * 0.3333); bottom: calc(40px + 55% * 0.3333);">
+                                <div class="marker-tooltip">
+                                    <span class="tooltip-title">Rippling</span>
+                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>78</span></div>
                                 </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill" style="width: 78%; background-color: var(--color-purple);"></div>
-                                </div>
+                                <div class="marker-logo standard" style="background: var(--color-purple);">R</div>
+                                <div class="marker-label">Rippling</div>
                             </div>
-                        </div>
-                        <div class="leaderboard-row">
-                            <span class="rank-num">#3</span>
-                            <div class="company-logo" style="background-color: var(--color-orange);">G</div>
-                            <div class="row-content">
-                                <div class="row-header">
-                                    <span class="company-name">Gusto</span>
-                                    <div class="score-box">
-                                        <span class="change neg">-2</span>
-                                        <span class="score-val">65</span>
-                                    </div>
+                            
+                            <!-- Gusto - Low Price (25%) / High Affordability (90%) -->
+                            <div class="company-marker" style="left: calc(50px + 25% * 0.3333); bottom: calc(40px + 90% * 0.3333);">
+                                <div class="marker-tooltip">
+                                    <span class="tooltip-title">Gusto</span>
+                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>High</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>65</span></div>
                                 </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill" style="width: 65%; background-color: var(--color-orange);"></div>
-                                </div>
+                                <div class="marker-logo standard" style="background: var(--color-orange);">G</div>
+                                <div class="marker-label">Gusto</div>
                             </div>
-                        </div>
-                        <div class="leaderboard-row">
-                            <span class="rank-num">#4</span>
-                            <div class="company-logo" style="background-color: var(--color-emerald);">R</div>
-                            <div class="row-content">
-                                <div class="row-header">
-                                    <span class="company-name">Remote.com</span>
-                                    <div class="score-box">
-                                        <span class="change pos">+8</span>
-                                        <span class="score-val">52</span>
-                                    </div>
+                            
+                            <!-- Remote.com - Medium Price (50%) / Medium Affordability (50%) -->
+                            <div class="company-marker" style="left: calc(50px + 50% * 0.3333); bottom: calc(40px + 50% * 0.3333);">
+                                <div class="marker-tooltip">
+                                    <span class="tooltip-title">Remote.com</span>
+                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Medium</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>52</span></div>
                                 </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill" style="width: 52%; background-color: var(--color-emerald);"></div>
-                                </div>
+                                <div class="marker-logo standard" style="background: var(--color-emerald);">Rc</div>
+                                <div class="marker-label">Remote</div>
                             </div>
-                        </div>
-                        <div class="leaderboard-row">
-                            <span class="rank-num">#5</span>
-                            <div class="company-logo" style="background-color: var(--color-pink);">P</div>
-                            <div class="row-content">
-                                <div class="row-header">
-                                    <span class="company-name">Papaya Global</span>
-                                    <div class="score-box">
-                                        <span class="change pos">+3</span>
-                                        <span class="score-val">47</span>
-                                    </div>
+                            
+                            <!-- Papaya Global - High Price (90%) / Low Affordability (30%) -->
+                            <div class="company-marker" style="left: calc(50px + 85% * 0.3333); bottom: calc(40px + 30% * 0.3333);">
+                                <div class="marker-tooltip">
+                                    <span class="tooltip-title">Papaya Global</span>
+                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>High</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Low</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>47</span></div>
                                 </div>
-                                <div class="progress-track">
-                                    <div class="progress-fill" style="width: 47%; background-color: var(--color-pink);"></div>
+                                <div class="marker-logo standard" style="background: var(--color-pink);">P</div>
+                                <div class="marker-label">Papaya</div>
+                            </div>
+                            
+                            <!-- Oyster HR - Low Price (30%) / Medium Affordability (70%) -->
+                            <div class="company-marker" style="left: calc(50px + 30% * 0.3333); bottom: calc(40px + 70% * 0.3333);">
+                                <div class="marker-tooltip">
+                                    <span class="tooltip-title">Oyster HR</span>
+                                    <div class="tooltip-row"><span class="tooltip-label">Price:</span><span>Low</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">Affordability:</span><span>Medium</span></div>
+                                    <div class="tooltip-row"><span class="tooltip-label">AI Score:</span><span>New</span></div>
                                 </div>
+                                <div class="marker-logo standard" style="background: var(--color-red);">O</div>
+                                <div class="marker-label">Oyster</div>
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <h2 class="card-title">Market Movements</h2>
-                        <div class="movement-item">
-                            <div class="movement-header">
-                                <span class="status-badge status-gaining">Gaining</span>
-                                <span class="movement-val val-green">+12%</span>
+                    <div style="display: flex; flex-direction: column; gap: 24px;">
+                        <div class="card">
+                            <h2 class="card-title">Market Movements</h2>
+                            <div class="movement-item">
+                                <div class="movement-header">
+                                    <span class="status-badge status-gaining">Gaining</span>
+                                    <span class="movement-val val-green">+12%</span>
+                                </div>
+                                <h3 class="movement-title">Remote.com</h3>
+                                <p class="movement-desc">Up 12% in 'EOR platform' queries</p>
                             </div>
-                            <h3 class="movement-title">Remote.com</h3>
-                            <p class="movement-desc">Up 12% in 'EOR platform' queries</p>
+                            <div class="movement-item">
+                                <div class="movement-header">
+                                    <span class="status-badge status-losing">Losing</span>
+                                    <span class="movement-val val-red">-8%</span>
+                                </div>
+                                <h3 class="movement-title">Gusto</h3>
+                                <p class="movement-desc">Down 8% in 'payroll software' queries</p>
+                            </div>
+                            <div class="movement-item">
+                                <div class="movement-header">
+                                    <span class="status-badge status-new">New</span>
+                                    <span class="movement-val val-blue">New</span>
+                                </div>
+                                <h3 class="movement-title">Oyster HR</h3>
+                                <p class="movement-desc">First appeared in AI responses this week</p>
+                            </div>
                         </div>
-                        <div class="movement-item">
-                            <div class="movement-header">
-                                <span class="status-badge status-losing">Losing</span>
-                                <span class="movement-val val-red">-8%</span>
+                        <div class="card">
+                            <h2 class="card-title">Competitor Summary</h2>
+                            <div style="font-size: 13px; line-height: 1.6; color: #4b5563;">
+                                <p style="margin-bottom: 12px;"><strong>Market Dynamics:</strong> The EOR/HR platform market shows clear segmentation between premium enterprise solutions (Deel, Rippling, Papaya) and SMB-focused platforms (Gusto, Oyster).</p>
+                                <p style="margin-bottom: 12px;"><strong>Deel Position:</strong> Positioned as a premium solution with high affordability, offering strong value for enterprise clients seeking global compliance.</p>
+                                <p><strong>Emerging Threat:</strong> Oyster HR gaining traction in freelancer segment with competitive pricing.</p>
                             </div>
-                            <h3 class="movement-title">Gusto</h3>
-                            <p class="movement-desc">Down 8% in 'payroll software' queries</p>
-                        </div>
-                        <div class="movement-item">
-                            <div class="movement-header">
-                                <span class="status-badge status-new">New</span>
-                                <span class="movement-val val-blue">New</span>
-                            </div>
-                            <h3 class="movement-title">Oyster HR</h3>
-                            <p class="movement-desc">First appeared in AI responses this week</p>
                         </div>
                     </div>
-                
+                </div>
         </div>
     </div>
 
